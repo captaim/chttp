@@ -1,4 +1,4 @@
-#include "warp.h"
+#include "wrap.h"
 #include "parse.h"
 
 #define PID_FILE  "pid.file"
@@ -18,14 +18,16 @@ int main(int argc, char **argv)
     #endif
 
     openlog(argv[0], LOG_NDELAY|LOG_PID, LOG_DAEMON);
-    printf("%s", argv[0]);
     cwd = (char *)get_current_dir_name();
     strcpy(tmpcwd, cwd);
     strcat(tmpcwd, "/");
 
-#ifdef HTTPS
-#else
-    parse_option(argc, argv, &isdaemon, &portp, &logp);
-#endif
+    #ifdef HTTPS
+    #else
+        parse_option(argc, argv, &isdaemon, &portp, &logp);
+    #endif
+
+    portp == NULL ? (port = atoi(Getconfig("http"))) : (port = atoi(portp));
+    printf("%d", port);
 }
 

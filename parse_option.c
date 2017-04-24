@@ -45,7 +45,7 @@ void parse_option(int argc, char **argv, char *d, char **portp, char **logp)
     #ifdef HTTPS
     while ((opt = getopt_long(argc, argv, ":dp:s:l:ehv", longopts, NULL)) != -1)
     #else
-    while ((opt = getopt_log(argc, argv, ":dp:l:hv", longopts, NULL)) != -1)
+    while ((opt = getopt_long(argc, argv, ":dp:l:hv", longopts, NULL)) != -1)
     #endif
     {
         switch (opt)
@@ -65,6 +65,24 @@ void parse_option(int argc, char **argv, char *d, char **portp, char **logp)
 				*dossl = 1;
 				break;
             #endif
+            case 'l':
+                strncpy(log, optarg, 63);
+                *logp = log;
+                break;
+            case ':':
+                fprintf(stderr, "-%c:option needs a value.\n", optopt);
+                exit(1);
+                break;
+            case 'h':
+                usage();
+                break;
+            case 'v':
+                version();
+                break;
+            case '?':
+                fprintf(stderr, "unknown option:%c\n", optopt);
+                usage();
+                break;
         }
     }
 }

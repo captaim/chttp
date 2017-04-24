@@ -17,6 +17,8 @@
 
 #include <getopt.h>
 
+char *Getconfig(char *);
+
 #ifdef HTTPS
 #else
 
