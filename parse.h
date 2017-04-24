@@ -15,6 +15,7 @@
 #include <syslog.h>
 #include <dirent.h>
 
+#include <getopt.h>
 
 #ifdef HTTPS
 #else
@@ -22,6 +23,5 @@
 void parse_option(int argc, char **argv, char *d, char **portp, char **logp);
 
 #endif
-
 
 #endif
