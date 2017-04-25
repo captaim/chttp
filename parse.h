@@ -19,6 +19,8 @@
 
 char *Getconfig(char *);
 
+void initlog(const char *logp);
+
 #ifdef HTTPS
 #else
 
